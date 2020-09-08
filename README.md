@@ -39,7 +39,7 @@ func main() {
 
 	params := new(scraper.Params)
 	params.URL = "https://pypi.org/classifiers/"
-    params.Country = "EE"
+	params.Country = "EE"
 
 	result := new(scraper.Result)
 
