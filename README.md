@@ -144,10 +144,11 @@ Let’s see `/tmp/test.json` file:
   "<button class=\"button button--small margin-top margin-bottom copy-tooltip copy-tooltip-w\" data-clipboard-text=\"Development Status :: 5 - Production/Stable\" data-tooltip-label=\"Copy to clipboard\" type=\"button\">\n Copy\n</button>\n",
   "<button class=\"button button--small margin-top margin-bottom copy-tooltip copy-tooltip-w\" data-clipboard-text=\"Development Status :: 6 - Mature\" data-tooltip-label=\"Copy to clipboard\" type=\"button\">\n Copy\n</button>\n",
   "<button class=\"button button--small margin-top margin-bottom copy-tooltip copy-tooltip-w\" data-clipboard-text=\"Development Status :: 7 - Inactive\" data-tooltip-label=\"Copy to clipboard\" type=\"button\">\n Copy\n</button>\n",
-  :
-  :
-  :
-  :
+  ,
+  ,
+  ,
+  ,
+  ,
 ]
 ```
 

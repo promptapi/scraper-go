@@ -1,6 +1,8 @@
 package scraper
 
 import (
+	"fmt"
+	"log"
 	"os"
 	"testing"
 )
@@ -102,4 +104,44 @@ func TestScrapeComplexRequest(t *testing.T) {
 	if len(result.DataSelector) < 700 {
 		t.Errorf("fetced array length should be greater than 700 items, got: %d", len(result.DataSelector))
 	}
+}
+
+func ExamplePromptAPI_Scrape() {
+	s := new(PromptAPI)
+	params := new(Params)
+	params.URL = "https://pypi.org/classifiers/"
+
+	result := new(Result)
+
+	err := s.Scrape(params, result)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("Length of incoming data: %d\n", len(result.Data))
+	fmt.Printf("Response headers: %v\n", result.Headers)
+	fmt.Printf("Content-Length: %v\n", result.Headers["Content-Length"])
+}
+
+func ExamplePromptAPI_Save() {
+	s := new(PromptAPI)
+	params := new(Params)
+	params.URL = "https://pypi.org/classifiers/"
+
+	result := new(Result)
+
+	err := s.Scrape(params, result)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("Length of incoming data: %d\n", len(result.Data))
+	fmt.Printf("Response headers: %v\n", result.Headers)
+	fmt.Printf("Content-Length: %v\n", result.Headers["Content-Length"])
+
+	fileSize, err := s.Save("/tmp/test.html", result)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Size of /tmp/test.html -> %d bytes\n", fileSize)
 }
