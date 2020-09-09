@@ -35,8 +35,9 @@ func TestScrapeBasicRequest(t *testing.T) {
 	}
 
 	s := new(PromptAPI)
-	params := new(Params)
-	params.URL = "https://pypi.org/classifiers/"
+	params := &Params{
+		URL: "https://pypi.org/classifiers/",
+	}
 
 	result := new(Result)
 
@@ -57,8 +58,9 @@ func TestScrapeBasicRequestWithSave(t *testing.T) {
 	}
 
 	s := new(PromptAPI)
-	params := new(Params)
-	params.URL = "https://pypi.org/classifiers/"
+	params := &Params{
+		URL: "https://pypi.org/classifiers/",
+	}
 
 	result := new(Result)
 
@@ -88,11 +90,11 @@ func TestScrapeComplexRequest(t *testing.T) {
 	}
 
 	s := new(PromptAPI)
-	params := new(Params)
-	params.URL = "https://pypi.org/classifiers/"
-	params.Country = "EE"
-	params.Selector = "ul li button[data-clipboard-text]"
-
+	params := &Params{
+		URL:      "https://pypi.org/classifiers/",
+		Country:  "EE",
+		Selector: "ul li button[data-clipboard-text]",
+	}
 	result := new(Result)
 
 	if err := s.Scrape(params, result); err != nil {
@@ -108,8 +110,9 @@ func TestScrapeComplexRequest(t *testing.T) {
 
 func ExamplePromptAPI_Scrape() {
 	s := new(PromptAPI)
-	params := new(Params)
-	params.URL = "https://pypi.org/classifiers/"
+	params := &Params{
+		URL: "https://pypi.org/classifiers/",
+	}
 
 	result := new(Result)
 
@@ -125,8 +128,9 @@ func ExamplePromptAPI_Scrape() {
 
 func ExamplePromptAPI_Save() {
 	s := new(PromptAPI)
-	params := new(Params)
-	params.URL = "https://pypi.org/classifiers/"
+	params := &Params{
+		URL: "https://pypi.org/classifiers/",
+	}
 
 	result := new(Result)
 
