@@ -9,6 +9,8 @@
 `PromptAPI` struct is a simple golang wrapper for [scraper api][scraper-api]
 with few more extra cream and sugar.
 
+---
+
 ## Requirements
 
 1. You need to signup for [Prompt API][promptapi-signup]
@@ -20,6 +22,8 @@ then;
 ```bash
 $ go get -u github.com/promptapi/scraper-go
 ```
+
+---
 
 ## Example Basic Usage
 
@@ -152,6 +156,8 @@ Let’s see `/tmp/test.json` file:
 ]
 ```
 
+---
+
 ## Development
 
 Available rake tasks:
@@ -173,8 +179,6 @@ Release package (*if you have write access*):
 1. Commit your changes
 1. Run `rake release:check`
 1. If all goes ok, run `rake release:publish`
-
----
 
 ---
 
