@@ -41,7 +41,7 @@ import (
 func main() {
 	s := new(scraper.PromptAPI)
 
-	params := &Params{
+	params := &scraper.Params{
 		URL:      "https://pypi.org/classifiers/",
 		Country:  "EE",
 	}
@@ -102,7 +102,7 @@ import (
 func main() {
 	s := new(scraper.PromptAPI)
 
-	params := &Params{
+	params := &scraper.Params{
 		URL:      "https://pypi.org/classifiers/",
 		Country:  "EE",
 		Selector: "ul li button[data-clipboard-text]",
