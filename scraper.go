@@ -37,9 +37,10 @@ type Params struct {
 	Selector     string
 }
 
-type extraHeader struct {
-	name  string
-	value string
+// ExtraHeader represents extra header information
+type ExtraHeader struct {
+	Name  string
+	Value string
 }
 
 var promptAPIEndpoint = "https://api.promptapi.com/scraper"
@@ -48,7 +49,7 @@ var promptAPIEndpoint = "https://api.promptapi.com/scraper"
 type PromptAPI struct{}
 
 // Scrape makes API call to Prompt API - Scraper and returns result
-func (pa PromptAPI) Scrape(params *Params, headers []*extraHeader, result *Result) error {
+func (pa PromptAPI) Scrape(params *Params, headers []*ExtraHeader, result *Result) error {
 	apiKey, ok := os.LookupEnv("PROMPTAPI_TOKEN")
 	if !ok {
 		return errors.New("You need to set PROMPTAPI_TOKEN environment variable")
@@ -94,7 +95,7 @@ func (pa PromptAPI) Scrape(params *Params, headers []*extraHeader, result *Resul
 	req.Header.Set("apikey", apiKey)
 	if len(headers) > 0 {
 		for _, h := range headers {
-			req.Header.Set(h.name, h.value)
+			req.Header.Set(h.Name, h.Value)
 		}
 	}
 

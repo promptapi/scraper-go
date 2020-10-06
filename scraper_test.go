@@ -19,7 +19,7 @@ func TestScrapeWithoutPromptAPIToken(t *testing.T) {
 	s := new(PromptAPI)
 	params := new(Params)
 	result := new(Result)
-	extraHeaders := []*extraHeader{}
+	extraHeaders := []*ExtraHeader{}
 
 	if err := s.Scrape(params, extraHeaders, result); err.Error() != "You need to set PROMPTAPI_TOKEN environment variable" {
 		t.Errorf("got: %v", err)
@@ -37,7 +37,7 @@ func TestScrapeBasicRequest(t *testing.T) {
 	}
 
 	result := new(Result)
-	extraHeaders := []*extraHeader{}
+	extraHeaders := []*ExtraHeader{}
 
 	if err := s.Scrape(params, extraHeaders, result); err != nil {
 		t.Errorf("got: %v", err)
@@ -61,7 +61,7 @@ func TestScrapeBasicRequestWithSave(t *testing.T) {
 	}
 
 	result := new(Result)
-	extraHeaders := []*extraHeader{}
+	extraHeaders := []*ExtraHeader{}
 
 	if err := s.Scrape(params, extraHeaders, result); err != nil {
 		t.Errorf("got: %v", err)
@@ -95,7 +95,7 @@ func TestScrapeComplexRequest(t *testing.T) {
 		Selector: "ul li button[data-clipboard-text]",
 	}
 	result := new(Result)
-	extraHeaders := []*extraHeader{}
+	extraHeaders := []*ExtraHeader{}
 
 	if err := s.Scrape(params, extraHeaders, result); err != nil {
 		t.Errorf("got: %v", err)
@@ -115,7 +115,7 @@ func ExamplePromptAPI_Scrape() {
 	}
 
 	result := new(Result)
-	extraHeaders := []*extraHeader{}
+	extraHeaders := []*ExtraHeader{}
 
 	err := s.Scrape(params, extraHeaders, result)
 	if err != nil {
@@ -134,10 +134,10 @@ func ExamplePromptAPI_Scrape_with_extra_headers() {
 	}
 
 	result := new(Result)
-	extraHeaders := []*extraHeader{
-		&extraHeader{
-			name:  "X-Referer",
-			value: "https://www.google.com",
+	extraHeaders := []*ExtraHeader{
+		&ExtraHeader{
+			Name:  "X-Referer",
+			Value: "https://www.google.com",
 		},
 	}
 
@@ -158,7 +158,7 @@ func ExamplePromptAPI_Save() {
 	}
 
 	result := new(Result)
-	extraHeaders := []*extraHeader{}
+	extraHeaders := []*ExtraHeader{}
 
 	err := s.Scrape(params, extraHeaders, result)
 	if err != nil {
