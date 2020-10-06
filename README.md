@@ -45,7 +45,7 @@ func main() {
 		URL:      "https://pypi.org/classifiers/",
 		Country:  "EE",
 	}
-	extraHeaders := []*extraHeader{} // custom extra headers
+	extraHeaders := []*ExtraHeader{} // custom extra headers
 	result := new(scraper.Result)
 
 	err := s.Scrape(params, extraHeaders, result)
@@ -108,8 +108,8 @@ func main() {
 		Selector: "ul li button[data-clipboard-text]",
 	}
 	// add extra request headers
-	extraHeaders := []*extraHeader{
-		&extraHeader{
+	extraHeaders := []*ExtraHeader{
+		&ExtraHeader{
 			name:  "X-Referer",
 			value: "https://www.google.com",
 		},
