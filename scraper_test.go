@@ -127,6 +127,30 @@ func ExamplePromptAPI_Scrape() {
 	fmt.Printf("Content-Length: %v\n", result.Headers["Content-Length"])
 }
 
+func ExamplePromptAPI_Scrape_with_extra_headers() {
+	s := new(PromptAPI)
+	params := &Params{
+		URL: "https://pypi.org/classifiers/",
+	}
+
+	result := new(Result)
+	extraHeaders := []*extraHeader{
+		&extraHeader{
+			name:  "X-Referer",
+			value: "https://www.google.com",
+		},
+	}
+
+	err := s.Scrape(params, extraHeaders, result)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("Length of incoming data: %d\n", len(result.Data))
+	fmt.Printf("Response headers: %v\n", result.Headers)
+	fmt.Printf("Content-Length: %v\n", result.Headers["Content-Length"])
+}
+
 func ExamplePromptAPI_Save() {
 	s := new(PromptAPI)
 	params := &Params{
