@@ -11,10 +11,6 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-func TestScrape(t *testing.T) {
-
-}
-
 func TestScrapeWithoutPromptAPIToken(t *testing.T) {
 	if os.Getenv("PROMPTAPI_TOKEN") != "" {
 		t.Skip("skipping test...")
@@ -23,8 +19,9 @@ func TestScrapeWithoutPromptAPIToken(t *testing.T) {
 	s := new(PromptAPI)
 	params := new(Params)
 	result := new(Result)
+	extraHeaders := []*extraHeader{}
 
-	if err := s.Scrape(params, result); err.Error() != "You need to set PROMPTAPI_TOKEN environment variable" {
+	if err := s.Scrape(params, extraHeaders, result); err.Error() != "You need to set PROMPTAPI_TOKEN environment variable" {
 		t.Errorf("got: %v", err)
 	}
 }
@@ -40,8 +37,9 @@ func TestScrapeBasicRequest(t *testing.T) {
 	}
 
 	result := new(Result)
+	extraHeaders := []*extraHeader{}
 
-	if err := s.Scrape(params, result); err != nil {
+	if err := s.Scrape(params, extraHeaders, result); err != nil {
 		t.Errorf("got: %v", err)
 	}
 	if result.URL != params.URL {
@@ -63,8 +61,9 @@ func TestScrapeBasicRequestWithSave(t *testing.T) {
 	}
 
 	result := new(Result)
+	extraHeaders := []*extraHeader{}
 
-	if err := s.Scrape(params, result); err != nil {
+	if err := s.Scrape(params, extraHeaders, result); err != nil {
 		t.Errorf("got: %v", err)
 	}
 	if result.URL != params.URL {
@@ -96,8 +95,9 @@ func TestScrapeComplexRequest(t *testing.T) {
 		Selector: "ul li button[data-clipboard-text]",
 	}
 	result := new(Result)
+	extraHeaders := []*extraHeader{}
 
-	if err := s.Scrape(params, result); err != nil {
+	if err := s.Scrape(params, extraHeaders, result); err != nil {
 		t.Errorf("got: %v", err)
 	}
 	if result.URL != params.URL {
@@ -115,8 +115,9 @@ func ExamplePromptAPI_Scrape() {
 	}
 
 	result := new(Result)
+	extraHeaders := []*extraHeader{}
 
-	err := s.Scrape(params, result)
+	err := s.Scrape(params, extraHeaders, result)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -133,8 +134,9 @@ func ExamplePromptAPI_Save() {
 	}
 
 	result := new(Result)
+	extraHeaders := []*extraHeader{}
 
-	err := s.Scrape(params, result)
+	err := s.Scrape(params, extraHeaders, result)
 	if err != nil {
 		log.Fatal(err)
 	}

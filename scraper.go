@@ -37,13 +37,18 @@ type Params struct {
 	Selector     string
 }
 
+type extraHeader struct {
+	name  string
+	value string
+}
+
 var promptAPIEndpoint = "https://api.promptapi.com/scraper"
 
 // PromptAPI represents type
 type PromptAPI struct{}
 
 // Scrape makes API call to Prompt API - Scraper and returns result
-func (pa PromptAPI) Scrape(params *Params, result *Result) error {
+func (pa PromptAPI) Scrape(params *Params, headers []*extraHeader, result *Result) error {
 	apiKey, ok := os.LookupEnv("PROMPTAPI_TOKEN")
 	if !ok {
 		return errors.New("You need to set PROMPTAPI_TOKEN environment variable")
@@ -83,9 +88,14 @@ func (pa PromptAPI) Scrape(params *Params, result *Result) error {
 	requiredURL := fmt.Sprintf("%s?%s", promptAPIEndpoint, v.Encode())
 
 	req, err := http.NewRequest("GET", requiredURL, nil)
-	req.Header.Set("apikey", apiKey)
 	if err != nil {
 		return err
+	}
+	req.Header.Set("apikey", apiKey)
+	if len(headers) > 0 {
+		for _, h := range headers {
+			req.Header.Set(h.name, h.value)
+		}
 	}
 
 	res, err := client.Do(req)
